@@ -1,0 +1,25 @@
+name: Mxa 24/7 Radar
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  scan_internet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Hacker Tools
+        run: pip install requests feedparser
+
+      - name: Run Mxa Radar
+        run: python live_scanner.py
+        
